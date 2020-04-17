@@ -142,7 +142,7 @@ function SunDaTonConfig_SaveAttack()
 			macro= string.format(SunDaTon_MacroXDDeform, SunDaTonConfig.XD.Deform) .. macro
 		end
 	end
-	if SunDaTonConfig.Other.Combat_State==0 then
+	if SunDaTon_Combat_State=0 then
 		macro = SunDaTon_Attack_Macro_Start .. macro
 	else
 		macro = SunDaTon_Attack_Macro_Start_In_Combat .. macro
