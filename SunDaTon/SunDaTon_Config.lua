@@ -142,15 +142,10 @@ function SunDaTonConfig_SaveAttack()
 			macro= string.format(SunDaTon_MacroXDDeform, SunDaTonConfig.XD.Deform) .. macro
 		end
 	end
-	if SunDaTon_Combat_State=0 then
+	if SunDaTonConfig.Attack.Cycle then
 		macro = SunDaTon_Attack_Macro_Start .. macro
 	else
-		macro = SunDaTon_Attack_Macro_Start_In_Combat .. macro
-	end
-	if SunDaTonConfig.Attack.Cycle then
-		macro = macro
-	else
-		macro = macro .. SunDaTon_Attack_Macro_End
+		macro = SunDaTon_Attack_Macro_Start .. macro .. SunDaTon_Attack_Macro_End
 	end
 	if SunDaTon_Player_Class==1 and SunDaTonConfig.Attack.ZSCharge then
 		macro = SunDaTon_MacroZSCharge .. macro

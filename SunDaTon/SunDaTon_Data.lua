@@ -33,13 +33,11 @@ SunDaTonConfig={}
 
 -- target start
 SunDaTon_Target_Macro_Start="/stopmacro [combat]"
-SunDaTon_Target_Enemy="\n/cleartarget\n/targetenemy [noexists][help][dead]"
+SunDaTon_Target_Enemy="\n/targetenemy [noexists][help][dead]"
 SunDaTon_Target_Skinning="\n/target [noexists][help] %s"
 SunDaTon_Target_NoSkinning="\n/target [noexists][help][dead] %s"
 -- attack start
 SunDaTon_Attack_Macro_Start="/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
-SunDaTon_Attack_Macro_Start_In_Combat="/cleartarget\n/targetenemy\n/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
-
 SunDaTon_Attack_Macro_Skill="/castsequence reset=target "
 SunDaTon_Attack_Macro_End="0,0,"
 
