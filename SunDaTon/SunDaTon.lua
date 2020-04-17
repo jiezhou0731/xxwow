@@ -87,12 +87,12 @@ SunDaTon:SetScript("OnEvent", function(self, event, addon)
 	SunDaTon_OnEvent(self, event, addon)
 end)
 SunDaTon:SetScript("OnUpdate", function(self) 
-	if UnitAffectingCombat("player")  and SunDaTon_Combat_State=0 then 
-		SunDaTon_Combat_State = 1 
+	if UnitAffectingCombat("player")  and SunDaTonConfig.Other.Combat_State~=1 then 
+		SunDaTonConfig.Other.Combat_State = 1 
 		SunDaTonConfig_SaveAttack()
 	end
-	if not UnitAffectingCombat("player") and SunDaTon_Combat_State=1 then
-		SunDaTon_Combat_State = 0
+	if not UnitAffectingCombat("player") and SunDaTonConfig.Other.Combat_State~=0 then
+		SunDaTonConfig.Other.Combat_State = 0
 		SunDaTonConfig_SaveAttack()
 	end
 end)
