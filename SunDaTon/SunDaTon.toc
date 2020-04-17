@@ -1,0 +1,12 @@
+##Interface:11303
+##Title:SunDaTon
+##Notes:游戏辅助工具
+##SavedVariablesPerCharacter:SunDaTonConfig
+##Author:SunDaTon
+##Version:v1.200213.0
+
+SunDaTon_Data.lua
+SunDaTon_Comm.lua
+SunDaTon_Config.xml
+SunDaTon_Config.lua
+SunDaTon.lua

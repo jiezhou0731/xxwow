@@ -1,0 +1,1715 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
+	
+	<Script file="config.lua" />
+	
+	<EditBox name="SunDaTon_Config_EditBoxTemplate" autoFocus="false" historyLines="32" justifyH="LEFT" virtual="true">
+    <Layers>
+      <Layer level="BORDER">
+        <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
+          <Size>
+            <AbsDimension x="8" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="TOPLEFT">
+              <Offset>
+                <AbsDimension x="-5" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
+        </Texture>
+        <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
+          <Size>
+            <AbsDimension x="8" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="RIGHT">
+              <Offset>
+                <AbsDimension x="5" y="0"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0.9375" right="1.0" top="0" bottom="0.625"/>
+        </Texture>
+        <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
+          <Size>
+            <AbsDimension x="10" y="20"/>
+          </Size>
+          <Anchors>
+            <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
+            <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
+          </Anchors>
+          <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
+        </Texture>
+      </Layer>
+    </Layers>
+    <Size>
+      <AbsDimension x="240" y="20"/>
+    </Size>
+    <FontString inherits="GameFontHighlightSmall"/>
+    <Layers>
+      <Layer level="ARTWORK">
+        <FontString name="$parentText" text=" " inherits="GameFontNormalSmall">
+          <Size>
+            <AbsDimension x="0" y="10"/>
+          </Size>
+          <Anchors>
+            <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="TOPLEFT">
+              <Offset>
+                <AbsDimension x="0" y="4"/>
+              </Offset>
+            </Anchor>
+          </Anchors>
+        </FontString>
+      </Layer>
+    </Layers>
+    <Scripts>
+      <OnEscapePressed>self:ClearFocus();</OnEscapePressed>
+      <OnEditFocusLost>self:HighlightText(0, 0);</OnEditFocusLost>
+      <OnEditFocusGained>self:HighlightText();</OnEditFocusGained>
+    </Scripts>
+  </EditBox>
+	
+	<!-- MainFrame -->
+	<Frame name="SunDaTonConfigFrame" toplevel="true" frameStrata="DIALOG" movable="true" parent="UIParent" enableMouse="true" hidden="true">
+		<Size>
+			<AbsDimension x="800" y="600"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Backdrop tile="true"
+			bgFile="Interface\DialogFrame\UI-DialogBox-Background"
+			edgeFile="Interface\DialogFrame\UI-DialogBox-Border">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11"/>
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32"/>
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32"/>
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer level="ARTWORK">
+			<Texture name="SunDaTonConfigTitleBox" file="Interface\DialogFrame\UI-DialogBox-Header">
+				<Size>
+					<AbsDimension x="400" y="64"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOP">
+						<Offset>
+							<AbsDimension x="0" y="12"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Texture>
+			<FontString inherits="GameFontNormal" text="SUNDATON_CONFIG_TITLE">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="SunDaTonConfigTitleBox">
+						<Offset>
+							<AbsDimension x="0" y="-13"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</FontString>
+			</Layer>
+		</Layers>
+		
+		<Frames>
+			<!-- Menu -->
+			<Button name="SunDaTonConfigSetTargetButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_TARGET">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="25" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowTargetPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigSetAttackButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_ATTACK">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigSetTargetButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowAttackPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigCheckBuffButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_BUFF">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigSetAttackButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowBuffPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigShowRestoreButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_RESTORE">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigCheckBuffButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowResorePanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigRubbishButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_RUBBISH">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigShowRestoreButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowRubbishPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigOtherButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_OTHER">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbishButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowOtherPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigDZButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_DZ" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigOtherButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowDZPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigSMButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_SM" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigOtherButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowSMPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigSSButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_SS" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigOtherButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowSSPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigLRButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_LR" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigOtherButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowLRPanel()</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="SunDaTonConfigXDButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_XD" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigOtherButton" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="0" y="-30"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTon_ShowXDPanel()</OnClick>
+				</Scripts>
+			</Button>
+			
+			<!-- Target Settings frame start -->
+			<Frame name="SunDaTonConfigTargetSettingsPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<!-- targetenemy -->
+					<CheckButton name="SunDaTonConfigTargetenemy" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigTargetenemy_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_TARGETENEMY">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<!-- skinning -->
+					<CheckButton name="SunDaTonConfigSkinning" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTargetenemy" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigTargetSkinning_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_SKINNING">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigSkinning" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<!-- pettarget -->
+					<CheckButton name="SunDaTonConfigPetTarget" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigSkinning" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="200" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigTargetPet_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_PET">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigPetTarget" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<!-- target1 -->
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTarget1Tips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_TARGET1">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigSkinning" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-50"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigTarget1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigTarget1Tips" relativePoint="RIGHT">
+								<Offset><AbsDimension x="20" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigTarget_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<!-- target2 -->
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTarget2Tips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_TARGET2">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTarget1Tips" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigTarget2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigTarget2Tips" relativePoint="RIGHT">
+								<Offset><AbsDimension x="20" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigTarget_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<!-- target3 -->
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTarget3Tips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_TARGET3">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTarget2Tips" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigTarget3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigTarget3Tips" relativePoint="RIGHT">
+								<Offset><AbsDimension x="20" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigTarget_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<!-- target4 -->
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTarget4Tips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_TARGET4">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTarget3Tips" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigTarget4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigTarget4Tips" relativePoint="RIGHT">
+								<Offset><AbsDimension x="20" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigTarget_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<!-- target preview -->
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTargetPreviewTips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_TARGET_PREVIEW">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTarget4Tips" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-50"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString name="SunDaTonConfigTargetPreview" inherits="GameFontNormalSmall" justifyH="LEFT" text="SUNDATON_CONFIG_TARGET_MACRO">
+                      <Anchors>
+							<Anchor point="LEFTTOP" relativeTo="SunDaTonConfigTargetPreviewTips" relativePoint="LEFTTOP">
+								<Offset><AbsDimension x="0" y="-25"/></Offset>
+							</Anchor>
+						</Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<!-- clear target -->
+					<Button name="SunDaTonConfigClearTarget" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_TARGET_CLEARTARGET">
+						<Size><AbsDimension x="125" y="25"/></Size>
+						<Anchors>
+							<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+							<Offset><AbsDimension x="-25" y="18"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigClearTarget_Click()</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Target Settings end -->
+			
+			<!-- Attack Settings frame start -->
+			<Frame name="SunDaTonConfigAttackSettingsPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigAttackCycle" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+							<Offset><AbsDimension x="25" y="-20"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigAttackCycle_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="SunDaTonConfigAttackZSCharge" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+							<Offset><AbsDimension x="275" y="-20"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigAttackZSCharge_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="SunDaTonConfigPetAttack" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttackZSCharge" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigPetAttack_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_ATTACK_SKILL_CYCLE">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigAttackCycle" relativePoint="RIGHT">
+							<Offset><AbsDimension x="10" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						</FontString>
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_ZS_CHARGE">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigAttackZSCharge" relativePoint="RIGHT">
+							<Offset><AbsDimension x="10" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						</FontString>
+						<FontString name="SunDaTonConfigAttackTips" inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_ATTACK_SKILL_LIST">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigAttackCycle" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+						</FontString>
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_PET_ATTACK_TIPS">
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigPetAttack" relativePoint="RIGHT">
+							<Offset><AbsDimension x="10" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigAttack1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigAttackTips" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="0" y="-25"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack1" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack2" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack3" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack5" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack4" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,5)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack6" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack5" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,6)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack7" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack6" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,7)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack8" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack7" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,8)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack9" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack8" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,9)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack10" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack9" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,10)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigAttack11" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigAttack10" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigAttack_OnTextChanged(self,11)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<!-- preview -->
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_ATTACK_PREVIEW">
+							<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigPetAttack" relativePoint="BOTTOMLEFT">
+							<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString name="SunDaTonConfigAttackPreview" inherits="GameFontNormalSmall" justifyH="LEFT" text="SUNDATON_CONFIG_ATTACK_MACRO">
+							<Size><AbsDimension x="300"/></Size>
+							<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigPetAttack" relativePoint="BOTTOMLEFT">
+							<Offset><AbsDimension x="0" y="-40"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<!--ResetButton-->
+					<Button name="SunDaTonConfigAttackReset" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_RESET" hidden="true">
+						<Size>
+							<AbsDimension x="125" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="25" y="18"/>
+							</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfig_ResetAttack()</OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Attack Settings frame end -->
+			
+			<!-- Check BUFF frame start -->
+			<Frame name="SunDaTonConfigBuffSettingsPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<EditBox name="SunDaTonConfigBuff1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+							<Offset><AbsDimension x="25" y="-50"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuff_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuff2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigBuff1" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuff_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuff3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigBuff2" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuff_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuff4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigBuff3" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuff_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuffSkill1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigBuff1" relativePoint="TOPRIGHT">
+							<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuffSkill_OnTextChange(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuffSkill2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigBuff2" relativePoint="TOPRIGHT">
+							<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuffSkill_OnTextChange(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuffSkill3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigBuff3" relativePoint="TOPRIGHT">
+							<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuffSkill_OnTextChange(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigBuffSkill4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigBuff4" relativePoint="TOPRIGHT">
+							<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBuffSkill_OnTextChange(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_BUFF_LIST">
+							<Anchors>
+							<Anchor point="BOTTOM" relativeTo="SunDaTonConfigBuff1" relativePoint="TOP">
+							<Offset><AbsDimension x="0" y="10"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_BUFF_SKILL_LIST">
+							<Anchors>
+							<Anchor point="BOTTOM" relativeTo="SunDaTonConfigBuffSkill1" relativePoint="TOP">
+							<Offset><AbsDimension x="0" y="10"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_BUFF_ADVANCE">
+							<Anchors>
+							<Anchor point="TOP" relativePoint="TOP">
+							<Offset><AbsDimension x="0" y="10"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<!--ResetButton-->
+					<Button name="SunDaTonConfigBuffReset" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_RESET" hidden="true">
+						<Size>
+							<AbsDimension x="125" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="25" y="18"/>
+							</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick></OnClick>
+						</Scripts>
+					</Button>
+				</Frames>
+			</Frame>
+			<!-- Check BUFF frame end -->
+			
+			<!-- Restore frame start -->
+			<Frame name="SunDaTonConfigRestorePanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<Slider name="SunDaTonHealthSlider" inherits="OptionsSliderTemplate" 
+						orientation="HORIZONTAL" enableMouse="true">
+						<Size><AbsDimension x="200" y="16" /></Size>
+						<Anchors>
+						<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="50" y="-50" /></Offset>
+						</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>SunDaTonConfigHealth_OnValueChange(self)</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_HEALTH_FOOD">
+							<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonHealthSlider" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigFood1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonHealthSlider" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-60"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigHealth_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigFood2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigFood1" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigHealth_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigFood3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigFood2" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigHealth_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigFood4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigFood3" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigHealth_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					
+					<Slider name="SunDaTonPowerSlider" inherits="OptionsSliderTemplate" 
+						orientation="HORIZONTAL" enableMouse="true">
+						<Size><AbsDimension x="200" y="16" /></Size>
+						<Anchors>
+						<Anchor point="TOPRIGHT">
+						<Offset><AbsDimension x="-50" y="-50" /></Offset>
+						</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>SunDaTonConfigPower_OnValueChange(self)</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_POWER_DRICK">
+							<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonPowerSlider" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigDrick1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonPowerSlider" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-60"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigPower_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigDrick2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigDrick1" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigPower_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigDrick3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigDrick2" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigPower_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConSfigDrick4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="200" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativeTo="SunDaTonConfigDrick3" relativePoint="BOTTOM">
+							<Offset><AbsDimension x="0" y="-10"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigPower_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+				</Frames>
+			</Frame>
+			<!-- Restore frame end -->
+			
+			<!-- Rubbish frame start -->
+			<Frame name="SunDaTonConfigRubbishPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigEnableRubbish" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigEnableRubbish_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_RUBBISH_ENABLE">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_RUBBISH_LIST">
+                      <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="BOTTOMLEFT">
+                          <Offset><AbsDimension x="0" y="-20"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigRubbish1" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-50"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,1)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish2" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish1" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,2)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish3" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish2" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,3)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish4" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish3" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,4)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish5" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish4" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,5)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish6" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish5" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,6)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish7" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish6" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,7)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigRubbish8" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigRubbish7" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-15"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigRubbish_OnTextChanged(self,8)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+				</Frames>
+			</Frame>
+			<!-- Rubbish frame end -->
+			
+			<!-- Other frame start -->
+			<Frame name="SunDaTonConfigOtherPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigEnableBangke" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigEnableBangke_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_OTHER_BANGKE">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_OTHER_BANGKE_NAME">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="150" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<EditBox name="SunDaTonConfigBangkeName" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigTargetenemy" relativePoint="RIGHT">
+								<Offset><AbsDimension x="230" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigBangkeName_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Slider name="SunDaTonConfigCombatDelay" inherits="OptionsSliderTemplate" 
+						orientation="HORIZONTAL" enableMouse="true">
+						<Size><AbsDimension x="200" y="16" /></Size>
+						<Anchors>
+						<Anchor point="TOPLEFT">
+						<Offset><AbsDimension x="25" y="-80" /></Offset>
+						</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>SunDaTonConfigCombatDelay_OnValueChange(self)</OnValueChanged>
+						</Scripts>
+					</Slider>
+				</Frames>
+			</Frame>
+			<!-- Other frame end -->
+			
+			<!-- DZ frame start -->
+			<Frame name="SunDaTonConfigDZPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigAutoPoison" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigAutoPoison_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="SunDaTonConfigMainPoison" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigAutoPoison" relativePoint="TOPLEFT">
+								<Offset><AbsDimension x="0" y="-70"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigMainPoison_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<EditBox name="SunDaTonConfigSecondaryPoison" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigMainPoison" relativePoint="RIGHT">
+								<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigSecondaryPoison_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_DZ_AUTOPOSION">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigAutoPoison" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_DZ_MAINPOSION">
+                      <Anchors>
+                        <Anchor point="BOTTOM" relativeTo="SunDaTonConfigMainPoison" relativePoint="TOP">
+                          <Offset><AbsDimension x="0" y="10"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_DZ_SECONDARYPOSION">
+                      <Anchors>
+                        <Anchor point="BOTTOM" relativeTo="SunDaTonConfigSecondaryPoison" relativePoint="TOP">
+                          <Offset><AbsDimension x="0" y="10"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+				</Frames>
+			</Frame>
+			<!-- DZ frame end -->
+			
+			<!-- SM frame start -->
+			<Frame name="SunDaTonConfigSMPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigAutoEnchant" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigAutoEnchant_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="SunDaTonConfigEnchantSkill" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigAutoEnchant" relativePoint="RIGHT">
+								<Offset><AbsDimension x="260" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigEnchantSkill_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SM_AUTOENCHANT">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigAutoEnchant" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SM_ENCHANTSKILL">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigAutoEnchant" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="150" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+				</Frames>
+			</Frame>
+			<!-- SM frame end -->
+				
+			<!-- SS frame start -->
+			<Frame name="SunDaTonConfigSSPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigSSPet" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigSSPet_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="SunDaTonConfigSSPetSkill" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigSSPet" relativePoint="RIGHT">
+								<Offset><AbsDimension x="270" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigSSPetSkill_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SS_PET">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigSSPet" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SS_PETSKILL">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigSSPet" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="130" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+					<!-- pet health -->
+					<CheckButton name="SunDaTonConfigSSPetHealth" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-50" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigSSPetHealth_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Slider name="SunDaTonSSPetHealthSlider" inherits="OptionsSliderTemplate" 
+						orientation="HORIZONTAL" enableMouse="true">
+						<Size><AbsDimension x="200" y="16" /></Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="SunDaTonConfigSSPetHealth" relativePoint="BOTTOMLEFT">
+								<Offset><AbsDimension x="0" y="-30"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnValueChanged>SunDaTonConfigSSPetHealth_OnValueChange(self)</OnValueChanged>
+						</Scripts>
+					</Slider>
+					<EditBox name="SunDaTonConfigSSPetHealthSkill" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonSSPetHealthSlider" relativePoint="RIGHT">
+								<Offset><AbsDimension x="50" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigSSPetHealthSkill_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SS_PETHEALTH">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigSSPetHealth" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_SS_PETHEALTH_SKILL">
+                      <Anchors>
+                        <Anchor point="BOTTOM" relativeTo="SunDaTonConfigSSPetHealthSkill" relativePoint="TOP">
+                          <Offset><AbsDimension x="0" y="10"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+				</Frames>
+			</Frame>
+			<!-- SS frame end -->
+			
+			<!-- LR frame start -->
+			<Frame name="SunDaTonConfigLRPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<CheckButton name="SunDaTonConfigLRPet" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+								<AbsDimension x="28" y="-15" />
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigLRPet_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="SunDaTonConfigLRPetHealth" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="SunDaTonConfigLRPet" relativePoint="BOTTOMLEFT">
+                          <Offset><AbsDimension x="0" y="-10"/></Offset>
+                        </Anchor>
+                      </Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigLRPetHealth_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="SunDaTonConfigLRPetHappyness" inherits="OptionsCheckButtonTemplate">
+						<Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="SunDaTonConfigLRPetHealth" relativePoint="BOTTOMLEFT">
+                          <Offset><AbsDimension x="0" y="-10"/></Offset>
+                        </Anchor>
+                      </Anchors>
+						<Scripts>
+							<OnClick>SunDaTonConfigLRPetHappyness_Click(self)</OnClick>
+						</Scripts>
+					</CheckButton>
+					<EditBox name="SunDaTonConfigLRPetMeat" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="SunDaTonConfigLRPetHappyness" relativePoint="RIGHT">
+								<Offset><AbsDimension x="210" y="0"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigLRPetMeat_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+                    <FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_LR_PET_REVIVE">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigLRPet" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_LR_PETHEALTH">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigLRPetHealth" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_LR_PETHAPPYNESS">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigLRPetHappyness" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="10" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_LR_PETMEAT">
+                      <Anchors>
+                        <Anchor point="LEFT" relativeTo="SunDaTonConfigLRPetHappyness" relativePoint="RIGHT">
+                          <Offset><AbsDimension x="130" y="0"/></Offset>
+                        </Anchor>
+                      </Anchors>
+                    </FontString>
+					</Layer></Layers></Frame>
+				</Frames>
+			</Frame>
+			<!-- LR frame end -->
+			
+			<!-- XD frame start -->
+			<Frame name="SunDaTonConfigXDPanel" hidden="true">
+				<Size>
+					<AbsDimension x="600" y="500"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+					<Offset>
+						<AbsDimension x="175" y="-50"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" >
+					<EdgeSize>
+						<AbsValue val="12"/>
+					</EdgeSize>
+					<TileSize>
+						<AbsValue val="16"/>
+					</TileSize>
+				</Backdrop>
+				<Frames>
+					<EditBox name="SunDaTonConfigXDDeform" inherits="SunDaTon_Config_EditBoxTemplate">
+						<Size><AbsDimension x="230" y="20"/></Size>
+						<Anchors>
+							<Anchor point="TOP" relativePoint="TOP">
+								<Offset><AbsDimension x="0" y="-40"/></Offset>
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnTextChanged>SunDaTonConfigXDDeform_OnTextChanged(self)</OnTextChanged>
+						</Scripts>
+					</EditBox>
+					<Frame><Layers><Layer level="BACKGROUND">
+						<FontString inherits="GameFontNormalSmall" text="SUNDATON_CONFIG_XD_DEFORM">
+						  <Anchors>
+							<Anchor point="BOTTOM" relativeTo="SunDaTonConfigXDDeform" relativePoint="TOP">
+							  <Offset><AbsDimension x="0" y="10"/></Offset>
+							</Anchor>
+						  </Anchors>
+						</FontString>
+					</Layer></Layers></Frame>
+				</Frames>
+			</Frame>
+			<!-- XD frame end -->
+			
+			<!--AboutButton-->
+			<Button name="SunDaTonConfigAboutButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_ABOUT" hidden="true">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+					<Offset>
+						<AbsDimension x="25" y="18"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+			<!--CloseButton-->
+			<Button name="SunDaTonConfigCloseButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_CLOSE">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT">
+					<Offset>
+						<AbsDimension x="-25" y="18"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>SunDaTonConfigClose()</OnClick>
+				</Scripts>
+			</Button>
+			<!-- reload button-->
+			<Button name="SunDaTonConfigReloadButton" inherits="UIPanelButtonTemplate" text="SUNDATON_CONFIG_RELOAD" hidden="false">
+				<Size>
+					<AbsDimension x="125" y="25"/>
+				</Size>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="SunDaTonConfigCloseButton" relativePoint="LEFT">
+					<Offset>
+						<AbsDimension x="-25" y="0"/>
+					</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>ReloadUI()</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+	</Frame>
+</Ui>
