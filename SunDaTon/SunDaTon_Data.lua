@@ -32,10 +32,10 @@ SunDaTon_MacroXDDeform="/cast [nostance] %s\n"
 SunDaTonConfig={}
 
 -- target start
-SunDaTon_Target_Macro_Start="/stopmacro [combat]"
+SunDaTon_Target_Macro_Start="/cleartarget"
 SunDaTon_Target_Enemy="\n/targetenemy [noexists][help][dead]"
-SunDaTon_Target_Skinning="\n/target [noexists][help] %s"
-SunDaTon_Target_NoSkinning="\n/target [noexists][help][dead] %s"
+SunDaTon_Target_Skinning="\n/targetenemy [nocombat] %s"
+SunDaTon_Target_NoSkinning="\n/targetenemy [nocombat] %s"
 -- attack start
 SunDaTon_Attack_Macro_Start="/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
 SunDaTon_Attack_Macro_Skill="/castsequence reset=target "
