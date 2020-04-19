@@ -86,3 +86,14 @@ SunDaTon:RegisterEvent("BAG_UPDATE")
 SunDaTon:SetScript("OnEvent", function(self, event, addon)
 	SunDaTon_OnEvent(self, event, addon)
 end)
+
+SunDaTon:SetScript("OnUpdate", function(self) 
+	if UnitAffectingCombat("player")  and not SunDaTon_Combat_State=1 then 
+		SunDaTon_Combat_State = 1 
+	end
+	if not UnitAffectingCombat("player") and not SunDaTon_Combat_State=0 then
+		SunDaTon_Combat_State = 0
+		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
+	end
+end)
+
