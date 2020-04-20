@@ -88,10 +88,10 @@ SunDaTon:SetScript("OnEvent", function(self, event, addon)
 end)
 
 SunDaTon:SetScript("OnUpdate", function(self) 
-	if UnitAffectingCombat("player")  and not SunDaTon_Combat_State=1 then 
+	if UnitAffectingCombat("player")  and not SunDaTon_Combat_State==1 then 
 		SunDaTon_Combat_State = 1 
 	end
-	if not UnitAffectingCombat("player") and not SunDaTon_Combat_State=0 then
+	if not UnitAffectingCombat("player") and not SunDaTon_Combat_State==0 then
 		SunDaTon_Combat_State = 0
 		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
 	end
