@@ -57,15 +57,14 @@ function Player:Check()
 		end
 	end
 	if SunDaTon_CheckHealth(SunDaTonConfig.Restore.HealthPrecentage) and SunDaTon_CheckBuff("进食") then
-		local local_macro = SunDaTon_MacroAction,SunDaTon_MacroActionStart .. "\n/sit\n"
 		for i=1,#SunDaTonConfig.Restore.HealthList,1 do
 			if string.len(SunDaTonConfig.Restore.HealthList[i])>0 
 			and SunDaTon_CheckBag(SunDaTonConfig.Restore.HealthList[i]) then
-				SunDaTon_EditMacro(SunDaTon_MacroAction,local_macro  ..SunDaTonConfig.Restore.HealthList[i])
+				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroActionStart .. "\n/sit\n" ..SunDaTonConfig.Restore.HealthList[i])
 				return
 			elseif string.len(SunDaTonConfig.Restore.HealthList[i])>0
 			and IsUsableSpell(SunDaTonConfig.Restore.HealthList[i]) then 
-				SunDaTon_EditMacro(SunDaTon_MacroAction,local_macro .. SunDaTonConfig.Restore.HealthList[i])	
+				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroActionStart .. SunDaTonConfig.Restore.HealthList[i])	
 				return
 			end
 		end	
