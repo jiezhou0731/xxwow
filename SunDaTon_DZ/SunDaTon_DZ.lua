@@ -68,11 +68,11 @@ function Player:Check()
 				return
 			end
 		end	
-		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
+		SunDaTon_EditMacro(SunDaTon_MacroAction,"/sit")
 		return
 	end
 	if not SunDaTon_CheckBuff("进食") and SunDaTon_CheckHealth(99) then
-		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
+		SunDaTon_EditMacro(SunDaTon_MacroAction,"/sit")
 		return
 	end
 	SunDaTon_EditMacro(SunDaTon_MacroAction, SunDaTonConfig.Target.Macro)
