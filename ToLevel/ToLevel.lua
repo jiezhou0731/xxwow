@@ -106,7 +106,8 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			
 			mobsToLevelRound = calculateXpToLevel(tableSum / table.getn(previousResults));
 			
-			outputText = format("%d mobs needed to level up. ", mobsToLevelRound);
+			outputText = os.date('%Y-%m-%d %H:%M:%S: ')
+			outputText = outputText .. format("%d mobs left, ", mobsToLevelRound);
 
 			if lastKillTimestamp > 0 then
 				table.insert(previousKillTimes, currentKillTimestamp - lastKillTimestamp);
