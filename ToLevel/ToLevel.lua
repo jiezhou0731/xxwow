@@ -1,5 +1,6 @@
 local ToLevel_EventFrame = CreateFrame("Frame")
 local previousResults = {}
+local previousKillTimes = {}
 local minValue = 0
 local maxValue = 0
 local lastKillTimestamp = 0
@@ -108,7 +109,12 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			outputText = format("%d mobs needed to level up. ", mobsToLevelRound);
 
 			if lastKillTimestamp > 0 then
-				outputText = outputText .. (mobsToLevelRound * (currentKillTimestamp-lastKillTimestamp) / 3600) .. " hours left. "
+				table.insert(previousKillTimes, currentKillTimestamp - lastKillTimestamp);
+				if table.getn(previousKillTimes) > 10 then
+					table.remove(previousKillTimes,1);
+				end
+				averageKillTime = table.sum(previousKillTimes) /  table.getn(previousKillTimes);
+				outputText = outputText .. string.format("%.1f", mobsToLevelRound * averageKillTime / 3600) .. " hours left. "
 			end
 			
 			DEFAULT_CHAT_FRAME:AddMessage(outputText, 1.0, 1.0, 0.0);
