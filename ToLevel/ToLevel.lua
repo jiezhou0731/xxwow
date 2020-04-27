@@ -106,7 +106,8 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			
 			mobsToLevelRound = calculateXpToLevel(tableSum / table.getn(previousResults));
 			
-			outputText = os.date('%Y-%m-%d %H:%M:%S: ')
+			outputText = "";
+			outputText = outputText .. date('%H:%M -- ');
 			outputText = outputText .. format("%d mobs left, ", mobsToLevelRound);
 
 			if lastKillTimestamp > 0 then
