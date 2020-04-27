@@ -2,7 +2,8 @@ local ToLevel_EventFrame = CreateFrame("Frame")
 local previousResults = {}
 local minValue = 0
 local maxValue = 0
-
+local lastKillTimestamp = 0
+local currentKillTimestamp = 0
 table.reduce = function (list, fn) 
     local acc
     for k, v in ipairs(list) do
@@ -70,7 +71,10 @@ ToLevel_EventFrame:SetScript("OnEvent",
 		_, _, creatureName, xp = string.find(xpGainText, "(.+) dies, you gain (%d+) experience.")
 		
 		if creatureName then
-			if table.getn(previousResults) > 50 then
+			lastKillTimestamp = currentKillTimestamp
+			currentKillTimestamp = time()
+
+			if table.getn(previousResults) > 5 then
 				table.remove(previousResults,1)
 			end
 			
@@ -101,10 +105,10 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			
 			mobsToLevelRound = calculateXpToLevel(tableSum / table.getn(previousResults));
 			
-			if calculateXpToLevel(minValue) == calculateXpToLevel(maxValue) then
-				outputText = format("%d mobs needed to level up.", mobsToLevelRound);
-			else
-				outputText = format("~ %d (%d - %d) mobs needed to level up.", mobsToLevelRound, calculateXpToLevel(maxValue), calculateXpToLevel(minValue));
+			outputText = format("%d mobs needed to level up. ", mobsToLevelRound);
+
+			if lastKillTimestamp > 0 then
+				outputText = outputText .. (mobsToLevelRound * (currentKillTimestamp-lastKillTimestamp) / 3600) .. " hours left. "
 			end
 			
 			DEFAULT_CHAT_FRAME:AddMessage(outputText, 1.0, 1.0, 0.0);
