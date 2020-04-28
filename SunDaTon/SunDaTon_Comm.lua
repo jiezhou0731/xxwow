@@ -45,6 +45,10 @@ function SunDaTon_CheckHealth(Precent)
 	-- SunDaTong_CheckHealth()
 end
 
+function SunDaTon_GetHealth()
+	return UnitHealth("player")/UnitHealthMax("player")*100
+end
+
 function SunDaTon_CheckPower(Precent)
 	if UnitPower("player")/UnitPowerMax("player")*100<Precent then 
 		return true

@@ -35,7 +35,12 @@ function Player:Check()
 				return
 			end
 		end
-		if not weapon2 then
+
+		local offHandLink = GetInventoryItemLink("player",17)
+		local _, _, _, _, _, _, itemType = GetItemInfo(offHandLink)
+		local itemTypeSt = "" .. itemType
+		if not weapon2 and itemTypeSt ~= "Miscellaneous" then
+			DEFAULT_CHAT_FRAME:AddMessage("in", 1.0, 1.0, 0.0);
 			if string.len(SunDaTonConfig.DZ.SecondaryPoison)>0 
 				and SunDaTon_CheckBag(SunDaTonConfig.DZ.SecondaryPoison) then
 				SunDaTon_EditMacro(SunDaTon_MacroAction,string.format(SunDaTon_MacroDZSecondaryPoison, SunDaTonConfig.DZ.SecondaryPoison))
@@ -43,37 +48,21 @@ function Player:Check()
 			end
 		end
 	end
-	for i=1,#SunDaTonConfig.BUFF.BuffList,1 do
-		if string.len(SunDaTonConfig.BUFF.BuffList[i])>0 and SunDaTon_CheckBuff(SunDaTonConfig.BUFF.BuffList[i]) then
-			if string.len(SunDaTonConfig.BUFF.SkillList[i])>0 
-				and SunDaTon_CheckBag(SunDaTonConfig.BUFF.SkillList[i]) then
-				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroStandUp .. SunDaTonConfig.BUFF.SkillList[i])
-				return
-			elseif string.len(SunDaTonConfig.BUFF.SkillList[i])>0 
-				and IsUsableSpell(SunDaTonConfig.BUFF.SkillList[i]) then 
-				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroStandUp .. SunDaTonConfig.BUFF.SkillList[i])
-				return
-			end
-		end
-	end
-	if SunDaTon_CheckHealth(SunDaTonConfig.Restore.HealthPrecentage) and SunDaTon_CheckBuff("进食") then
-		for i=1,#SunDaTonConfig.Restore.HealthList,1 do
-			if string.len(SunDaTonConfig.Restore.HealthList[i])>0 
-			and SunDaTon_CheckBag(SunDaTonConfig.Restore.HealthList[i]) then
-				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroActionStart .. SunDaTonConfig.Restore.HealthList[i])
-				return
-			elseif string.len(SunDaTonConfig.Restore.HealthList[i])>0
-			and IsUsableSpell(SunDaTonConfig.Restore.HealthList[i]) then 
-				SunDaTon_EditMacro(SunDaTon_MacroAction,SunDaTon_MacroActionStart .. SunDaTonConfig.Restore.HealthList[i])	
-				return
-			end
-		end	
-		SunDaTon_EditMacro(SunDaTon_MacroAction,"\n/cast [nocombat,stance:0] Stealth\n/sit")
+
+	local Regen = "/stopmacro [combat]\n/equipslot 17 Darkmist Orb of Spirit\n/cast [nocombat,stance:0] stealth\n/sit\n/stopmacro [stance:0]\n"
+	if SunDaTon_CheckHealth(70) then
+		Regen = Regen .. Jie_Regen_Equip
+		SunDaTon_EditMacro(SunDaTon_MacroAction,Regen)
 		return
 	end
-	if not SunDaTon_CheckBuff("进食") and SunDaTon_CheckHealth(99) then
-		SunDaTon_EditMacro(SunDaTon_MacroAction,"\n/cast [nocombat,stance:0] Stealth\n/sit")
+	if SunDaTon_GetHealth() > 85 and SunDaTon_GetHealth() < 99 then
+		Regen = Regen .. Jie_Fight_Equip
+		SunDaTon_EditMacro(SunDaTon_MacroAction,Regen)
 		return
 	end
-	SunDaTon_EditMacro(SunDaTon_MacroAction, SunDaTonConfig.Target.Macro)
+	if SunDaTon_GetHealth() == 100 then
+		SunDaTon_EditMacro(SunDaTon_MacroAction, SunDaTonConfig.Target.Macro)
+		return
+	end
+	SunDaTon_EditMacro(SunDaTon_MacroAction, Regen)
 end
