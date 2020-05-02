@@ -123,10 +123,9 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			mobsToLevelRound = calculateXpToLevel(tableSum / table.getn(previousResults));
 			
 			outputText = "";
-			outputText = outputText .. date('%H:%M -- ');
-			outputText = outputText .. format("%d mobs left, ", mobsToLevelRound);
-
+			
 			if lastKillTimestamp > 0 then
+				outputText = outputText .. string.format("last interval: %.1f min, ",(currentKillTimestamp - lastKillTimestamp)/60)
 				table.insert(previousKillTimes, currentKillTimestamp - lastKillTimestamp);
 				if table.getn(previousKillTimes) > 10 then
 					table.remove(previousKillTimes,1);
@@ -134,7 +133,9 @@ ToLevel_EventFrame:SetScript("OnEvent",
 				averageKillTime = table.median(previousKillTimes);
 				outputText = outputText .. string.format("%.1f", mobsToLevelRound * averageKillTime / 3600) .. " hours left. "
 			end
-			
+			outputText = outputText .. format("%d mobs left, ", mobsToLevelRound);
+			outputText = outputText .. date('%H:%M');
+
 			DEFAULT_CHAT_FRAME:AddMessage(outputText, 1.0, 1.0, 0.0);
 			
 		end
