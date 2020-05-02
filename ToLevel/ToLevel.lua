@@ -25,6 +25,22 @@ table.sum = function(list)
 		end
 	)
 end
+
+table.median = function (list) 
+	local sorted = {}
+    for k, v in ipairs(list) do
+        if 1 == k then
+            for xx in pairs (sorted) do
+			    sorted [xx] = nil
+			end
+		table.insert(sorted, v)
+    end 
+    table.sort (sorted)
+    return sorted[(table.getn(previousResults) + 1)/2]
+end
+
+
+
 local frame, events = CreateFrame("Frame"), {};
 function events:PLAYER_LEVEL_UP(...)
 	previousResults = {}
@@ -115,7 +131,7 @@ ToLevel_EventFrame:SetScript("OnEvent",
 				if table.getn(previousKillTimes) > 10 then
 					table.remove(previousKillTimes,1);
 				end
-				averageKillTime = table.sum(previousKillTimes) /  table.getn(previousKillTimes);
+				averageKillTime = table.median(previousKillTimes);
 				outputText = outputText .. string.format("%.1f", mobsToLevelRound * averageKillTime / 3600) .. " hours left. "
 			end
 			
