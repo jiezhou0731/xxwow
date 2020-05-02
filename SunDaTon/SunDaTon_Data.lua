@@ -1,19 +1,13 @@
 
-Jie_Wear_Offhand_Weapon = "/equipslot 17 Sliverblade\n"
+Jie_Wear_Offhand_Weapon = "/equipslot 17 Rune Sword of the M\n"
 Jie_Fight_Equip = ""
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Imperial Cloak\n"
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Blood Ring\n"
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Ranger Gloves of the Monkey\n"
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Tracker's Leggings of the Monkey\n"
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Huntsman's Armor of the Monkey\n"
-
-
+Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Tracker's L\n"
+Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Serpentskin C\n"
 Jie_Regen_Equip = ""
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Gossamer Cape of Spirit\n"
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Thallium Hoop of Spirit\n"
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Regal Leggings of Spirit\n"
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Nocturnal Tunic of Spirit\n"
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Sorcerer Gloves of Spirit\n"
+Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Gossamer Cape\n"
+Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Regal Leggings\n"
+Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Darkmist\n"
+
 
 Jie_Current_Equip = 0
 
@@ -56,7 +50,7 @@ SunDaTon_Target_Enemy="\n/targetenemy [noexists][help][dead]"
 SunDaTon_Target_Skinning="\n/target [noexists][help][dead] %s"
 SunDaTon_Target_NoSkinning="\n/target [noexists][help][dead] %s"
 -- attack start
-SunDaTon_Attack_Macro_Start= "/stopmacro [nocombat]\n/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
+SunDaTon_Attack_Macro_Start= "/cast [nocombat,stance:0] Stealth\n/stopmacro [nocombat]\n" .. Jie_Wear_Offhand_Weapon .. "\n/target [noexists][dead]\n/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
 SunDaTon_Attack_Macro_Skill="/castsequence reset=target "
 SunDaTon_Attack_Macro_End="0,0,"
 

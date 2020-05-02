@@ -76,7 +76,7 @@ function SunDaTonConfig_SaveTarget()
 	if SunDaTon_Player_Class==1 and SunDaTonConfig.Attack.ZSCharge then
 		macro = SunDaTon_MacroZSCharge .. macro
 	end
-	macro = macro .. "\n/cast [nocombat,stance:0] Stealth"
+	macro = macro .. "\n"
 	SunDaTonConfigTargetPreview:SetText(macro)
 	SunDaTonConfig.Target.Macro = macro
 end

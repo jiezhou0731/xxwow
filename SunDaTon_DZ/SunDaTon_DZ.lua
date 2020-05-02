@@ -40,7 +40,6 @@ function Player:Check()
 		local _, _, _, _, _, _, itemType = GetItemInfo(offHandLink)
 		local itemTypeSt = "" .. itemType
 		if not weapon2 and itemTypeSt ~= "Miscellaneous" then
-			DEFAULT_CHAT_FRAME:AddMessage("in", 1.0, 1.0, 0.0);
 			if string.len(SunDaTonConfig.DZ.SecondaryPoison)>0 
 				and SunDaTon_CheckBag(SunDaTonConfig.DZ.SecondaryPoison) then
 				SunDaTon_EditMacro(SunDaTon_MacroAction,string.format(SunDaTon_MacroDZSecondaryPoison, SunDaTonConfig.DZ.SecondaryPoison))
@@ -50,12 +49,12 @@ function Player:Check()
 	end
 
 	local Regen = "/stopmacro [combat]\n/equipslot 17 Darkmist Orb of Spirit\n/cast [nocombat,stance:0] stealth\n/sit\n/stopmacro [stance:0]\n"
-	if SunDaTon_CheckHealth(70) then
+	if SunDaTon_CheckHealth(75) then
 		Regen = Regen .. Jie_Regen_Equip
 		SunDaTon_EditMacro(SunDaTon_MacroAction,Regen)
 		return
 	end
-	if SunDaTon_GetHealth() > 85 and SunDaTon_GetHealth() < 99 then
+	if SunDaTon_GetHealth() > 90 and SunDaTon_GetHealth() < 99 then
 		Regen = Regen .. Jie_Fight_Equip
 		SunDaTon_EditMacro(SunDaTon_MacroAction,Regen)
 		return
