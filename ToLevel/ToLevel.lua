@@ -1,3 +1,4 @@
+JIE_LAST_EXP_TIME = 0
 local ToLevel_EventFrame = CreateFrame("Frame")
 local previousResults = {}
 local previousKillTimes = {}
@@ -89,6 +90,7 @@ ToLevel_EventFrame:SetScript("OnEvent",
 		_, _, creatureName, xp = string.find(xpGainText, "(.+) dies, you gain (%d+) experience.")
 		
 		if creatureName then
+			JIE_LAST_EXP_TIME = time()
 			lastKillTimestamp = currentKillTimestamp
 			currentKillTimestamp = time()
 
