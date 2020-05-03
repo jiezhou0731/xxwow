@@ -1,12 +1,12 @@
 
 Jie_Wear_Offhand_Weapon = "/equipslot 17 Rune Sword of the M\n"
 Jie_Fight_Equip = ""
-Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Tracker's L\n"
+Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Righteous L\n"
 Jie_Fight_Equip = Jie_Fight_Equip .. "/equip Serpentskin C\n"
 Jie_Regen_Equip = ""
 Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Gossamer Cape\n"
 Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Regal Leggings\n"
-Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Darkmist\n"
+Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Darkmist O\n"
 
 
 Jie_Current_Equip = 0
@@ -30,8 +30,8 @@ SunDaTon_MacroBangke="/use %s \n/sdt check"
 SunDaTon_MacroActionStart="/stopmacro [combat]\n/cast "
 SunDaTon_MacroStandUp="/stopmacro [combat]\n/click MovePadRotateLeft\n/click MovePadRotateLeft\n/cast "
 SunDaTon_MacroCast="\n/cast "
-SunDaTon_MacroDZMainPoison="/stopmacro [combat]\n/use %s\n/use 16"
-SunDaTon_MacroDZSecondaryPoison="/stopmacro [combat]\n/use %s\n/use 17"
+SunDaTon_MacroDZMainPoison="/stopmacro [combat]\n/stand \n/use %s\n/use 16"
+SunDaTon_MacroDZSecondaryPoison="/stopmacro [combat]\n/stand \n/use %s\n/use 17"
 SunDaTon_MacroZSCharge="/cast [nocombat,exists,nodead] 冲锋\n"
 SunDaTon_MacroLRPet="/stopmacro [combat]\n/cast 复活宠物"
 SunDaTon_MacroLRPetHealth="/stopmacro [combat]\n/cast [pet] 治疗宠物"
@@ -48,9 +48,9 @@ SunDaTonConfig={}
 SunDaTon_Target_Macro_Start=Jie_Fight_Equip .. "\n/stopmacro [combat]\n"
 SunDaTon_Target_Enemy="\n/targetenemy [noexists][help][dead]"
 SunDaTon_Target_Skinning="\n/target [noexists][help][dead] %s"
-SunDaTon_Target_NoSkinning="\n/target [noexists][help][dead] %s"
+SunDaTon_Target_NoSkinning="\n/target %s"
 -- attack start
-SunDaTon_Attack_Macro_Start= "/cast [nocombat,stance:0] Stealth\n/stopmacro [nocombat]\n" .. Jie_Wear_Offhand_Weapon .. "\n/target [noexists][dead]\n/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
+SunDaTon_Attack_Macro_Start= "/cast [nocombat,stance:0] Stealth\n/stopmacro [nocombat]\n" .. Jie_Wear_Offhand_Weapon .. "\n/startattack [combat,exists]\n/stopmacro [noexists][help][dead]\n"
 SunDaTon_Attack_Macro_Skill="/castsequence reset=target "
 SunDaTon_Attack_Macro_End="0,0,"
 

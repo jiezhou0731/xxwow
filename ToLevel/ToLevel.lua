@@ -29,14 +29,15 @@ end
 table.median = function (list) 
 	local sorted = {}
     for k, v in ipairs(list) do
-        if 1 == k then
-            for xx in pairs (sorted) do
-			    sorted [xx] = nil
-			end
 		table.insert(sorted, v)
     end 
     table.sort (sorted)
-    return sorted[(table.getn(previousResults) + 1)/2]
+    for k, v in ipairs(sorted) do
+    	if k >= table.getn(list)/2 then 
+    		return v
+    	end
+    end 
+    return 1
 end
 
 
@@ -125,12 +126,13 @@ ToLevel_EventFrame:SetScript("OnEvent",
 			outputText = "";
 			
 			if lastKillTimestamp > 0 then
-				outputText = outputText .. string.format("last interval: %.1f min, ",(currentKillTimestamp - lastKillTimestamp)/60)
+				
 				table.insert(previousKillTimes, currentKillTimestamp - lastKillTimestamp);
 				if table.getn(previousKillTimes) > 10 then
 					table.remove(previousKillTimes,1);
 				end
 				averageKillTime = table.median(previousKillTimes);
+				outputText = outputText .. string.format("%.1f, %.1f -- ",(currentKillTimestamp - lastKillTimestamp)/60, averageKillTime/60)
 				outputText = outputText .. string.format("%.1f", mobsToLevelRound * averageKillTime / 3600) .. " hours left. "
 			end
 			outputText = outputText .. format("%d mobs left, ", mobsToLevelRound);
