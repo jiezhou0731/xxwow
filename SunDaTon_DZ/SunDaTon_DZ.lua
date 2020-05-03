@@ -48,6 +48,10 @@ function Player:Check()
 		end
 	end
 
+	if time() - JIE_LAST_EXP_TIME > 2 then
+		return
+	end
+
 	local Regen = "/stopmacro [combat]\n/equipslot 17 Darkmist Orb of Spirit\n/cast [nocombat,stance:0] stealth\n/sit\n/stopmacro [stance:0]\n"
 	if SunDaTon_CheckHealth(75) then
 		Regen = Regen .. Jie_Regen_Equip
