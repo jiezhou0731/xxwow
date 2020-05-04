@@ -54,6 +54,11 @@ local function SunDaTon_OnEvent(self, event, addon)
 			SunDaTon_AutoRubbish()
 		end
 	end
+
+	if time() - JIE_LAST_EXP_TIME < JIE_STOP_ACTION_AFTER_GETTING_EXP_IN_SECONDS then
+		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
+	end
+
 	--SunDaTon_OnEvent
 end
 
@@ -88,11 +93,7 @@ SunDaTon:SetScript("OnEvent", function(self, event, addon)
 end)
 
 SunDaTon:SetScript("OnUpdate", function(self) 
-	if UnitAffectingCombat("player")  and not SunDaTon_Combat_State==1 then 
-		SunDaTon_Combat_State = 1 
-	end
-	if not UnitAffectingCombat("player") and not SunDaTon_Combat_State==0 then
-		SunDaTon_Combat_State = 0
+	if time() - JIE_LAST_EXP_TIME < JIE_STOP_ACTION_AFTER_GETTING_EXP_IN_SECONDS then
 		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
 	end
 end)

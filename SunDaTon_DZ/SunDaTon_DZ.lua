@@ -48,7 +48,8 @@ function Player:Check()
 		end
 	end
 
-	if time() - JIE_LAST_EXP_TIME > 2 then
+	if time() - JIE_LAST_EXP_TIME < JIE_STOP_ACTION_AFTER_GETTING_EXP_IN_SECONDS then
+		SunDaTon_EditMacro(SunDaTon_MacroAction,"")
 		return
 	end
 

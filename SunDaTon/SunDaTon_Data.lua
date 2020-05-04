@@ -1,3 +1,5 @@
+JIE_STOP_ACTION_AFTER_GETTING_EXP_IN_SECONDS = 3
+
 
 Jie_Wear_Offhand_Weapon = "/equipslot 17 Rune Sword of the M\n"
 Jie_Fight_Equip = ""
@@ -9,7 +11,6 @@ Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Regal Leggings\n"
 Jie_Regen_Equip = Jie_Regen_Equip .. "/equip Darkmist\n"
 
 
-Jie_Current_Equip = 0
 
 SunDaTon = nil
 SunDaTon_Player = nil
