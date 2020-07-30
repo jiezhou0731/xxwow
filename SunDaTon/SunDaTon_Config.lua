@@ -76,7 +76,6 @@ function SunDaTonConfig_SaveTarget()
 	if SunDaTon_Player_Class==1 and SunDaTonConfig.Attack.ZSCharge then
 		macro = SunDaTon_MacroZSCharge .. macro
 	end
-	macro = macro .. "\n/targetenemy [combat]"
 	SunDaTonConfigTargetPreview:SetText(macro)
 	SunDaTonConfig.Target.Macro = macro
 end
